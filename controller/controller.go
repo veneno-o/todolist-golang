@@ -2,6 +2,7 @@ package controller
 
 import "github.com/gin-gonic/gin"
 
+// NewRouter 路由初始化
 func NewRouter() *gin.Engine {
 	r := gin.Default()
 
@@ -18,4 +19,11 @@ func NewRouter() *gin.Engine {
 		v1.POST("/", CreateTodoTask)
 	}
 	return r
+}
+
+// Msg 响应消息
+type Msg struct {
+	Code int         `json:"code"`
+	Msg  string      `json:"msg"`
+	Data interface{} `json:"data"`
 }
