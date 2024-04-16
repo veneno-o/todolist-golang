@@ -1,4 +1,4 @@
-package router
+package controller
 
 import (
 	"fmt"
@@ -19,7 +19,6 @@ func GetTodoTaskList(c *gin.Context) {
 // 创建todo-task
 func CreateTodoTask(c *gin.Context) {
 	fmt.Println("CreateTodoTask")
-
 }
 
 // 更新todo-task
