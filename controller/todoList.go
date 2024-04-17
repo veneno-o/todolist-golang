@@ -9,12 +9,39 @@ import (
 
 // 获取todo-task详情
 func GetTodoTask(c *gin.Context) {
-	fmt.Println("GetTodoTask")
+	id := c.Param("id")
+	todo, err := model.Get(id)
+	if err != nil {
+		c.JSON(500, gin.H{
+			"code": 5000,
+			"msg":  "failed",
+			"data": nil,
+		})
+	} else {
+		c.JSON(200, gin.H{
+			"code": 2000,
+			"msg":  "success",
+			"data": todo,
+		})
+	}
 }
 
 // 获取todo-task列表
 func GetTodoTaskList(c *gin.Context) {
-	fmt.Println("GetTodoTaskList")
+	todoList, err := model.GetAll()
+	if err != nil {
+		c.JSON(500, gin.H{
+			"code": 5000,
+			"msg":  "failed",
+			"data": nil,
+		})
+	} else {
+		c.JSON(200, gin.H{
+			"code": 2000,
+			"msg":  "success",
+			"data": todoList,
+		})
+	}
 }
 
 // 创建todo-task

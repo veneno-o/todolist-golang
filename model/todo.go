@@ -34,10 +34,18 @@ func Update(todo *Todo) error {
 	return err
 }
 
-func Get(todo *Todo) (*Todo, error) {
-	var err error
-	if err = DB.Find(&todo).Error; err != nil {
-		return todo, nil
+func Get(id string) (*Todo, error) {
+	var todo Todo
+	if err := DB.First(&todo, id).Error; err != nil {
+		return nil, err
 	}
-	return nil, err
+	return &todo, nil
+}
+
+func GetAll() ([]Todo, error) {
+	var todos []Todo
+	if err := DB.Find(&todos).Error; err != nil {
+		return nil, err
+	}
+	return todos, nil
 }
