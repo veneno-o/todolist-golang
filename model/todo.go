@@ -26,9 +26,9 @@ func Delete(id string) error {
 	return err
 }
 
-func Update(todo *Todo) error {
+func Update(id string, todo *Todo) error {
 	var err error
-	if err = DB.Save(todo).Error; err != nil {
+	if err = DB.Model(&Todo{}).Where("id = ?", id).Updates(todo).Error; err != nil {
 		return nil
 	}
 	return err

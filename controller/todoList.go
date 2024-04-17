@@ -1,7 +1,6 @@
 package controller
 
 import (
-	"fmt"
 	"todoList-golang/model"
 
 	"github.com/gin-gonic/gin"
@@ -72,7 +71,29 @@ func CreateTodoTask(c *gin.Context) {
 
 // 更新todo-task
 func UpdateTodoTask(c *gin.Context) {
-	fmt.Println("update todo task")
+	id := c.Param("id")
+	todo := model.Todo{}
+	if err := c.BindJSON(&todo); err != nil {
+		c.JSON(400, gin.H{
+			"code": 4001,
+			"msg":  "请求参数错误",
+			"data": nil,
+		})
+	}
+	err := model.Update(id, &todo)
+	if err != nil {
+		c.JSON(500, gin.H{
+			"code": 5000,
+			"msg":  "update failed",
+			"data": nil,
+		})
+	} else {
+		c.JSON(200, gin.H{
+			"code": 2000,
+			"msg":  "success",
+			"data": nil,
+		})
+	}
 }
 
 // 删除todo-task
