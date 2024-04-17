@@ -17,4 +17,5 @@ func ConnectDB() {
 	if err != nil {
 		panic("failed to connect database")
 	}
+	DB.Migrator().CreateTable(&Todo{})
 }

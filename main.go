@@ -1,20 +1,22 @@
 package main
 
 import (
-	"io"
-	"os"
+	"fmt"
 	"todoList-golang/controller"
-
-	"github.com/gin-gonic/gin"
+	"todoList-golang/model"
 )
 
 func main() {
 	// 强制日志颜色化
-	gin.ForceConsoleColor()
+	// gin.ForceConsoleColor()
 
 	// 记录到文件。
-	f, _ := os.Create("gin.log")
-	gin.DefaultWriter = io.MultiWriter(f)
+	// f, _ := os.Create("gin.log")
+	// gin.DefaultWriter = io.MultiWriter(f)
+
+	// 连接数据库
+	model.ConnectDB()
 	r := controller.NewRouter()
-	r.Run() // 监听并在 0.0.0.0:8080 上启动服务
+	fmt.Println("Server is running on port 8080")
+	r.Run(":8080") // 监听并在 0.0.0.0:8080 上启动服务
 }

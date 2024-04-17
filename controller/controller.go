@@ -17,13 +17,8 @@ func NewRouter() *gin.Engine {
 		v1.PUT("/:id", UpdateTodoTask)
 		// 新建任务
 		v1.POST("/", CreateTodoTask)
+		// 删除任务
+		v1.DELETE("/:id", DeleteTodoTask)
 	}
 	return r
-}
-
-// Msg 响应消息
-type Msg struct {
-	Code int         `json:"code"`
-	Msg  string      `json:"msg"`
-	Data interface{} `json:"data"`
 }
