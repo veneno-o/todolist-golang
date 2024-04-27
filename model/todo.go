@@ -10,7 +10,7 @@ type Todo struct {
 	Completed bool   `json:"completed"`
 }
 
-func Create(todo *Todo) error {
+func CreateTodo(todo *Todo) error {
 	var err error
 	if err = DB.Create(todo).Error; err != nil {
 		return nil
@@ -18,7 +18,7 @@ func Create(todo *Todo) error {
 	return err
 }
 
-func Delete(id string) error {
+func DeleteTodo(id string) error {
 	var err error
 	if err = DB.Delete(&Todo{}, id).Error; err != nil {
 		return nil
@@ -26,7 +26,7 @@ func Delete(id string) error {
 	return err
 }
 
-func Update(id string, todo *Todo) error {
+func UpdateTodo(id string, todo *Todo) error {
 	var err error
 	if err = DB.Model(&Todo{}).Where("id = ?", id).Updates(todo).Error; err != nil {
 		return nil
@@ -34,7 +34,7 @@ func Update(id string, todo *Todo) error {
 	return err
 }
 
-func Get(id string) (*Todo, error) {
+func GetTodo(id string) (*Todo, error) {
 	var todo Todo
 	if err := DB.First(&todo, id).Error; err != nil {
 		return nil, err
@@ -42,7 +42,7 @@ func Get(id string) (*Todo, error) {
 	return &todo, nil
 }
 
-func GetAll() ([]Todo, error) {
+func GetAllTodo() ([]Todo, error) {
 	var todos []Todo
 	if err := DB.Find(&todos).Error; err != nil {
 		return nil, err

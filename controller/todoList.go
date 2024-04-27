@@ -9,7 +9,7 @@ import (
 // 获取todo-task详情
 func GetTodoTask(c *gin.Context) {
 	id := c.Param("id")
-	todo, err := model.Get(id)
+	todo, err := model.GetTodo(id)
 	if err != nil {
 		c.JSON(500, gin.H{
 			"code": 5000,
@@ -27,7 +27,7 @@ func GetTodoTask(c *gin.Context) {
 
 // 获取todo-task列表
 func GetTodoTaskList(c *gin.Context) {
-	todoList, err := model.GetAll()
+	todoList, err := model.GetAllTodo()
 	if err != nil {
 		c.JSON(500, gin.H{
 			"code": 5000,
@@ -53,7 +53,7 @@ func CreateTodoTask(c *gin.Context) {
 			"data": nil,
 		})
 	}
-	err := model.Create(&todo)
+	err := model.CreateTodo(&todo)
 	if err != nil {
 		c.JSON(500, gin.H{
 			"code": 5000,
@@ -80,7 +80,7 @@ func UpdateTodoTask(c *gin.Context) {
 			"data": nil,
 		})
 	}
-	err := model.Update(id, &todo)
+	err := model.UpdateTodo(id, &todo)
 	if err != nil {
 		c.JSON(500, gin.H{
 			"code": 5000,
@@ -99,7 +99,7 @@ func UpdateTodoTask(c *gin.Context) {
 // 删除todo-task
 func DeleteTodoTask(c *gin.Context) {
 	id := c.Param("id")
-	err := model.Delete(id)
+	err := model.DeleteTodo(id)
 	if err != nil {
 		c.JSON(500, gin.H{
 			"code": 5000,
