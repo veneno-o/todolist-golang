@@ -18,4 +18,6 @@ func ConnectDB() {
 		panic("failed to connect database")
 	}
 	DB.Migrator().CreateTable(&Todo{})
+	DB.Migrator().CreateTable(&User{})
+
 }
