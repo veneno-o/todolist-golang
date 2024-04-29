@@ -1,13 +1,19 @@
 package model
 
 import (
+	"time"
+
 	"gorm.io/gorm"
 )
 
 type Todo struct {
-	gorm.Model
-	Title     string `json:"title"`
-	Completed bool   `json:"completed"`
+	ID            uint           `gorm:"primary_key" json:"id"` // 主键ID
+	CreatedAt     time.Time      `json:"created_at"`            // 创建时间（由GORM自动管理）
+	UpdatedAt     time.Time      `json:"updated_at"`            // 最后一次更新时间（由GORM自动管理）
+	DeletedAt     gorm.DeletedAt `gorm:"index"`
+	Title         string         `json:"title"`          //任务标题
+	CompletedTime *time.Time     `json:"completed_time"` // 完成时间
+	TaskType      string         `json:"task_type"`      // 任务类型
 }
 
 func CreateTodo(todo *Todo) error {
