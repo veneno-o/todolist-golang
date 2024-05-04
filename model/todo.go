@@ -13,7 +13,7 @@ type Todo struct {
 	DeletedAt     gorm.DeletedAt `gorm:"index"`
 	Title         string         `json:"title"`          //任务标题
 	CompletedTime *time.Time     `json:"completed_time"` // 完成时间
-	TaskType      string         `json:"task_type"`      // 任务类型
+	TaskType      uint           `json:"task_type"`      // 任务类型
 }
 
 func CreateTodo(todo *Todo) error {

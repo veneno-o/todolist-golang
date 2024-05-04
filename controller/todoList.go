@@ -2,16 +2,23 @@ package controller
 
 import (
 	"todoList-golang/model"
+	"todoList-golang/service"
 
 	"github.com/gin-gonic/gin"
 )
 
-// 获取todo-task详情
+// @Summary 获取todo-task详情
+// @Produce json
+// @Param id path int true "文章ID"
+// @Success 200 {object} Article "成功"
+// @Failure 400 {object} string "请求错误"
+// @Failure 500 {object} string "内部错误"
+// @Router /api/v1/articles/{id} [get]
 func GetTodoTask(c *gin.Context) {
 	id := c.Param("id")
 	todo, err := model.GetTodo(id)
 	if err != nil {
-		c.JSON(500, gin.H{
+		c.JSON(200, gin.H{
 			"code": 5000,
 			"msg":  "failed",
 			"data": nil,
@@ -29,7 +36,7 @@ func GetTodoTask(c *gin.Context) {
 func GetTodoTaskList(c *gin.Context) {
 	todoList, err := model.GetAllTodo()
 	if err != nil {
-		c.JSON(500, gin.H{
+		c.JSON(200, gin.H{
 			"code": 5000,
 			"msg":  "failed",
 			"data": nil,
@@ -53,11 +60,11 @@ func CreateTodoTask(c *gin.Context) {
 			"data": nil,
 		})
 	}
-	err := model.CreateTodo(&todo)
+	err := service.CreateTodoTaskServer(&todo)
 	if err != nil {
-		c.JSON(500, gin.H{
+		c.JSON(200, gin.H{
 			"code": 5000,
-			"msg":  "failed",
+			"msg":  err.Error(),
 			"data": nil,
 		})
 	} else {
@@ -82,7 +89,7 @@ func UpdateTodoTask(c *gin.Context) {
 	}
 	err := model.UpdateTodo(id, &todo)
 	if err != nil {
-		c.JSON(500, gin.H{
+		c.JSON(200, gin.H{
 			"code": 5000,
 			"msg":  "update failed",
 			"data": nil,
@@ -101,7 +108,7 @@ func DeleteTodoTask(c *gin.Context) {
 	id := c.Param("id")
 	err := model.DeleteTodo(id)
 	if err != nil {
-		c.JSON(500, gin.H{
+		c.JSON(200, gin.H{
 			"code": 5000,
 			"msg":  "delete failed",
 			"data": nil,
