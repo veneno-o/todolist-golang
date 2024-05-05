@@ -7,13 +7,18 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// @Summary 获取todo-task详情
-// @Produce json
-// @Param id path int true "文章ID"
-// @Success 200 {object} Article "成功"
-// @Failure 400 {object} string "请求错误"
-// @Failure 500 {object} string "内部错误"
-// @Router /api/v1/articles/{id} [get]
+//	@Summary	更新文章
+//	@Produce	json
+//	@Param		tag_id			body		string		false	"标签ID"
+//	@Param		title			body		string		false	"文章标题"
+//	@Param		desc			body		string		false	"文章简述"
+//	@Param		cover_image_url	body		string		false	"封面图片地址"
+//	@Param		content			body		string		false	"文章内容"
+//	@Param		modified_by		body		string		true	"修改者"
+//	@Success	200				{object}	model.Todo	"成功"
+//	@Failure	400				{object}	string		"请求错误"
+//	@Failure	500				{object}	string		"内部错误"
+//	@Router		/api/v1/Todo/{id} [put]
 func GetTodoTask(c *gin.Context) {
 	id := c.Param("id")
 	todo, err := model.GetTodo(id)
@@ -32,7 +37,18 @@ func GetTodoTask(c *gin.Context) {
 	}
 }
 
-// 获取todo-task列表
+//	@Summary	更新文章
+//	@Produce	json
+//	@Param		tag_id			body		string		false	"标签ID"
+//	@Param		title			body		string		false	"文章标题"
+//	@Param		desc			body		string		false	"文章简述"
+//	@Param		cover_image_url	body		string		false	"封面图片地址"
+//	@Param		content			body		string		false	"文章内容"
+//	@Param		modified_by		body		string		true	"修改者"
+//	@Success	200				{object}	model.Todo	"成功"
+//	@Failure	400				{object}	string		"请求错误"
+//	@Failure	500				{object}	string		"内部错误"
+//	@Router		/api/v1/Todo/{id} [put]
 func GetTodoTaskList(c *gin.Context) {
 	todoList, err := model.GetAllTodo()
 	if err != nil {
@@ -50,7 +66,18 @@ func GetTodoTaskList(c *gin.Context) {
 	}
 }
 
-// 创建todo-task
+//	@Summary	更新文章
+//	@Produce	json
+//	@Param		tag_id			body		string		false	"标签ID"
+//	@Param		title			body		string		false	"文章标题"
+//	@Param		desc			body		string		false	"文章简述"
+//	@Param		cover_image_url	body		string		false	"封面图片地址"
+//	@Param		content			body		string		false	"文章内容"
+//	@Param		modified_by		body		string		true	"修改者"
+//	@Success	200				{object}	model.Todo	"成功"
+//	@Failure	400				{object}	string		"请求错误"
+//	@Failure	500				{object}	string		"内部错误"
+//	@Router		/api/v1/Todo/{id} [put]
 func CreateTodoTask(c *gin.Context) {
 	todo := model.Todo{}
 	if err := c.BindJSON(&todo); err != nil {
@@ -59,6 +86,7 @@ func CreateTodoTask(c *gin.Context) {
 			"msg":  "请求参数错误",
 			"data": nil,
 		})
+		return
 	}
 	err := service.CreateTodoTaskServer(&todo)
 	if err != nil {
@@ -76,7 +104,18 @@ func CreateTodoTask(c *gin.Context) {
 	}
 }
 
-// 更新todo-task
+//	@Summary	更新文章
+//	@Produce	json
+//	@Param		tag_id			body		string		false	"标签ID"
+//	@Param		title			body		string		false	"文章标题"
+//	@Param		desc			body		string		false	"文章简述"
+//	@Param		cover_image_url	body		string		false	"封面图片地址"
+//	@Param		content			body		string		false	"文章内容"
+//	@Param		modified_by		body		string		true	"修改者"
+//	@Success	200				{object}	model.Todo	"成功"
+//	@Failure	400				{object}	string		"请求错误"
+//	@Failure	500				{object}	string		"内部错误"
+//	@Router		/api/v1/Todo/{id} [put]
 func UpdateTodoTask(c *gin.Context) {
 	id := c.Param("id")
 	todo := model.Todo{}
@@ -86,6 +125,7 @@ func UpdateTodoTask(c *gin.Context) {
 			"msg":  "请求参数错误",
 			"data": nil,
 		})
+		return
 	}
 	err := model.UpdateTodo(id, &todo)
 	if err != nil {
@@ -103,7 +143,18 @@ func UpdateTodoTask(c *gin.Context) {
 	}
 }
 
-// 删除todo-task
+//	@Summary	更新文章
+//	@Produce	json
+//	@Param		tag_id			body		string		false	"标签ID"
+//	@Param		title			body		string		false	"文章标题"
+//	@Param		desc			body		string		false	"文章简述"
+//	@Param		cover_image_url	body		string		false	"封面图片地址"
+//	@Param		content			body		string		false	"文章内容"
+//	@Param		modified_by		body		string		true	"修改者"
+//	@Success	200				{object}	model.Todo	"成功"
+//	@Failure	400				{object}	string		"请求错误"
+//	@Failure	500				{object}	string		"内部错误"
+//	@Router		/api/v1/Todo/{id} [put]
 func DeleteTodoTask(c *gin.Context) {
 	id := c.Param("id")
 	err := model.DeleteTodo(id)
