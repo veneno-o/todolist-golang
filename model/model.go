@@ -34,7 +34,6 @@ type LocalTime time.Time
 func (t *LocalTime) MarshalJSON() ([]byte, error) {
 	// LocalTime 转换成 time.Time 类型
 	tTime := time.Time(*t)
-	fmt.Println(1)
 	return []byte(fmt.Sprintf("\"%v\"", tTime.Format("2006-01-02 15:04:05"))), nil
 }
 
@@ -49,12 +48,9 @@ func (t *LocalTime) UnmarshalJSON(data []byte) error {
 	if err != nil {
 		return errors.New("时间格式有误，转换失败")
 	}
-	fmt.Println(2)
-
 	return nil
 }
 func (t LocalTime) Value() (driver.Value, error) {
-	fmt.Println(3)
 	var zeroTime time.Time
 	tlt := time.Time(t)
 	//判断给定时间是否和默认零时间的时间戳相同
@@ -68,6 +64,5 @@ func (t *LocalTime) Scan(v any) error {
 		*t = LocalTime(value)
 		return nil
 	}
-	fmt.Println(4)
 	return fmt.Errorf("不能转换 %V 为时间戳", v)
 }

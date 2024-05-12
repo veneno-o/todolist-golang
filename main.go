@@ -21,6 +21,6 @@ func main() {
 	// 连接数据库
 	model.ConnectDB()
 	r := controller.NewRouter()
-	fmt.Println("Server is running on port 8080...")
-	r.Run(":8080") // 监听并在 0.0.0.0:8080 上启动服务
+	fmt.Println("Server is running on port 6666...")
+	r.Run(":6666") // 监听并在 0.0.0.0:8080 上启动服务
 }
