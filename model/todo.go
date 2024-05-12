@@ -42,9 +42,10 @@ func GetTodo(id string) (*Todo, error) {
 	return &todo, nil
 }
 
-func GetAllTodo() ([]Todo, error) {
+// 筛选todo
+func GetAllTodo(todo *Todo) ([]Todo, error) {
 	var todos []Todo
-	if err := DB.Find(&todos).Error; err != nil {
+	if err := DB.Find(&todos, todo).Error; err != nil {
 		return nil, err
 	}
 	return todos, nil
